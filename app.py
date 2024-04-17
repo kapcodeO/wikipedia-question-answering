@@ -7,7 +7,7 @@ from transformers import pipeline, Pipeline
 def load_qa_pipeline() -> Pipeline :
     qa_pipeline = pipeline("question-answering", model = "distilbert-base-uncased-distilled-squad")
     if not qa_pipeline:
-        return "No answer found for this question."
+        return "No answer found for this question. Check splelling and try again or Ask another question"
     return qa_pipeline
 
 def load_wiki_summary(query: str) -> str:
@@ -33,7 +33,7 @@ def main():
     st.write('\n')
 
     # display topic input slot
-    topic = st.text_input("Search Topic :", "")
+    topic = st.text_input("Firstly Search Topic :", "")
 
     # display article paragraph
     article_paragraph = st.empty()
@@ -48,7 +48,7 @@ def main():
             article_paragraph.markdown(summary)
 
     # display question input slot
-    question =  st.text_input("Question :", "")
+    question =  st.text_input("Then ask a Question :", "")
 
     with st.spinner("Loading answer ..."):
         if question != "":
